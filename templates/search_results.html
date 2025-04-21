@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        li {
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        li strong {
+            color: #007bff;
+        }
+        li a {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results for "{{ query }}"</h1>
+
+    <ul>
+        {% for book in books %}
+            <li>
+                <strong>{{ book['title'] }}</strong> - ${{ book['price'] }} ({{ book['stock'] }} in stock)
+                <a href="{{ url_for('update_book_view', book_id=book['book_id']) }}">Update</a> |
+                <form action="{{ url_for('delete_book_view', book_id=book['book_id']) }}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% else %}
+            <p>No books found matching the search.</p>
+        {% endfor %}
+    </ul>
+
+    <div class="links">
+        <a href="{{ url_for('search_books_view') }}">New Search</a>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

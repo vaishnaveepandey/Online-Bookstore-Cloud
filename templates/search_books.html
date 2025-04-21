@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+        form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .results {
+            margin-top: 30px;
+        }
+        .results ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .results li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .results li:last-child {
+            border-bottom: none;
+        }
+        .results h2 {
+            color: #343a40;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search for Books</h1>
+    
+    <form method="POST">
+        <input type="text" name="query" placeholder="Search by title" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if books %}
+        <div class="results">
+            <h2>Search Results</h2>
+            <ul>
+                {% for book in books %}
+                    <li>
+                        <strong>{{ book['title'] }}</strong> - ${{ book['price'] }} ({{ book['stock'] }} in stock)
+                        <a href="{{ url_for('get_book_details', book_id=book['book_id']) }}">View Details</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% elif request.method == 'POST' %}
+        <p>No books found matching your search.</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}" class="back-link">Back to Home</a>
+</body>
+</html>

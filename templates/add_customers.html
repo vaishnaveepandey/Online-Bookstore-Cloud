@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Book</title>
+    <title>Add Customer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,27 +81,27 @@
 </head>
 <body>
     <div>
-        <h1>Add a New Book</h1>
+        <h1>Add a New Customer</h1>
         <form method="POST">
             <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
             </div>
             <div>
-                <label for="author_id">Author ID:</label>
-                <input type="number" id="author_id" name="author_id" required>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name">
             </div>
             <div>
-                <label for="price">Price:</label>
-                <input type="number" step="0.01" id="price" name="price" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
             </div>
             <div>
-                <label for="stock">Stock:</label>
-                <input type="number" id="stock" name="stock" required>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone">
             </div>
-            <button type="submit">Add Book</button>
+            <button type="submit">Add Customer</button>
         </form>
-        <a href="{{ url_for('index') }}">Back to Home</a>
+        <a href="{{ url_for('customers') }}">Back to Customers</a>
     </div>
 </body>
 </html>

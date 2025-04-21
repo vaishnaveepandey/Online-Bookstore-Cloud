@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, ul, button {
+            font-size: 16px;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        select {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        ul li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        ul li:last-child {
+            border-bottom: none;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Place an Order</h1>
+    
+    <form method="POST">
+        <!-- Select Customer -->
+        <div>
+            <label for="customer_id">Select Customer:</label>
+            <select name="customer_id" id="customer_id" required>
+                <option value="" disabled selected>Choose a customer</option>
+                {% for customer in customers %}
+                    <option value="{{ customer['customer_id'] }}">{{ customer['first_name'] }} {{ customer['last_name'] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- Select Books -->
+        <div>
+            <label>Select Books:</label>
+            <ul>
+                {% for book in books %}
+                    <li>
+                        <label>
+                            <input type="checkbox" name="books" value="{{ book['book_id'] }}">
+                            {{ book['title'] }} - ${{ book['price'] }} ({{ book['stock'] }} available)
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <button type="submit">Place Order</button>
+    </form>
+
+    <a href="{{ url_for('orders') }}" class="back-link">View Orders</a>
+</body>
+</html>
