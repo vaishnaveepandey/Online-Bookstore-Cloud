@@ -128,19 +128,3 @@ For deployment help, refer to the [deployment guide](#).
 Contributions are welcome!  
 If you’d like to suggest changes, please fork the repo and submit a pull request.
 
----
-
-## 🧑‍💻 Authors
-
-- 👤 **[Sweta Patel, Nisha Raval]** – Developer  
-- 🎓 Cloud Computing (Academic Submission)
-
----
-
-## 📃 License
-
-This project is licensed under the **MIT License**.  
-See the [LICENSE](LICENSE) file for details.
-
----
-
